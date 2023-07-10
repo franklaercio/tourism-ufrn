@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRESQL_URL:jdbc:postgresql://localhost:5432/tourism}
+    username: ${POSTGRESQL_USERNAME:postgres}
+    password: ${POSTGRESQL_PASSWORD:postgres}
+  profiles:
+    active: ${SPRING_PROFILE_ACTIVE:dev}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: ${POSTGRESQL_DB:tourism}
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: validate
+
+server:
+  port: ${EXPOSED_PORT_APP:8080}
+  servlet:
+    context-path: /
+
+springdoc:
+  swagger-ui.path: /

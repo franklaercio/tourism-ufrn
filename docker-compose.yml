@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  db-tourism:
+    image: postgres
+    container_name: db-tourism
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tourism
+    volumes:
+      - pgdata:/data/postgres
+  api:
+    container_name: api--tourism
+    image: api--tourism
+    build: .
+    depends_on:
+      - db-tourism
+    environment:
+      POSTGRESQL_URL: jdbc:postgresql://db-transaction:5432/tourism
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tourism
+    links:
+      - db-tourism
+    volumes:
+      - ./:/src
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

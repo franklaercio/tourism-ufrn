@@ -1,0 +1,3 @@
+CREATE SEQUENCE attraction_seq START 1;
+CREATE SEQUENCE user_seq START 1;
+CREATE SEQUENCE roadmap_seq START 1;
